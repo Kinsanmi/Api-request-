@@ -1,9 +1,17 @@
 import React from 'react';
 import { comment } from '../Cart';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/Store';
+import { SearchRequest } from '../SearchRequest';
 
 
 export const List:React.FC = () => {
+
+
+  const reservations = useSelector((state: RootState) =>{
+    state.reservation.value
+  })
+
   return (
     <>
     <div>
@@ -20,6 +28,11 @@ export const List:React.FC = () => {
           </>
         )
       })}</div>
+    </div>
+
+
+    <div>
+      {/* <SearchRequest /> */}
     </div>
     </>
   )

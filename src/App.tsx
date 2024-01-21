@@ -11,21 +11,25 @@ import { List } from './Component/List';
 
 interface Post {
   id: number;
-  title: string;
-  body: string;
-  tags: string[];
-  reactions: number;
+  firstName: string;
+  lastName: string;
+  maidenName: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  username: string;
 }
 
 interface PostData {
-  posts: Post[]
+  users: Post[]
 }
 
 function App (): JSX.Element {
 
   const [search, setSearch] = useState<string>("");
   // const[dataResult, setDataResult] = useState<IPost[]>([])
-  const[dataResult, setDataResult] = useState<PostData>({posts: []})
+  const[dataResult, setDataResult] = useState<PostData>({users: []})
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("")
 
@@ -49,10 +53,10 @@ function App (): JSX.Element {
   const fetchData = async() =>{
     setLoading(true)
     try {
-      const result = await fetch(`https://dummyjson.com/posts`);
+      const result = await fetch(`https://dummyjson.com/users`);
       const data = await result.json();
       setDataResult(data);
-      console.log(data);
+      //console.log(data);
     } catch (error) {
       console.log(`Error in fetching data`, error);
       setError((error as Error). message);
@@ -128,14 +132,14 @@ function App (): JSX.Element {
         <div>
           <div>
             <h1>Mapped Data from API</h1>
-            <div>{dataResult.posts.map((item)=>{
+            <div>{dataResult.users.map((item)=>{
               return (
                 <>
                 <div key={item.id}>List...</div>
-                <h4>{item.title}</h4>
-                <h4>{item.body}</h4>
-                <h4>{item.tags.join(',')}</h4>
-                <h4>{item.reactions}</h4>
+                <h4>{item.firstName}</h4>
+                <h4>{item.lastName}</h4>
+                <h4>{item.email}</h4>
+                <h4>{item.gender}</h4>
                 </>
               )
             })}</div>
